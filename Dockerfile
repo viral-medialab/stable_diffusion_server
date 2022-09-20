@@ -35,6 +35,8 @@ RUN pip3 install -r requirements.txt
 
 # RUN npm install && npm run build
 
+RUN python3 -c 'from huggingface_hub import HfFolder; HfFolder.save_token("<TOKEN>")'
+
 WORKDIR /stable_diffusion_server
 
 EXPOSE 3000
