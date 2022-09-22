@@ -1,5 +1,5 @@
-# stable_diffusion_server
-A repo for hosting your own Stable Diffusion API with Flask & Docker
+# Stable Diffusion API
+Runs your own Stable Diffusion v1.4 API with Flask & Docker
 
 ## Requirements:
 - NVIDIA GPU with CUDA installed & >10GB memory
