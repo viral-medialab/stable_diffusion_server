@@ -11,7 +11,7 @@ A repo for hosting your own Stable Diffusion API with Flask & Docker
 2. `sh setup.sh`
 3. In line 34 of the Dockerfile, replace `<TOKEN>` with your [Huggingface Access Token](https://huggingface.co/settings/tokens)
 4. `docker build --tag sd_server .`
-5. 'docker run -d -p 3000:3000 sd_server'
+5. `docker run -d -p 3000:3000 sd_server`
 The server should now be running at http://<your_external_ip>:3000/
 
 ## To Generate an Image from Text:
