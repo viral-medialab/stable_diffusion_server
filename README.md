@@ -1,2 +1,2 @@
 # stable_diffusion_server
-Instance of Stable Diffusion for hosting on Media Lab servers
+A repo for hosting your own Stable Diffusion API with Docker
