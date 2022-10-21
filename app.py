@@ -6,7 +6,7 @@ from torch import autocast
 from diffusers import StableDiffusionPipeline
 
 app = Flask(__name__, static_url_path='', static_folder='frontend/build')
-app.debug=True
+# app.debug=True
 
 CORS(app)
 
@@ -43,7 +43,7 @@ def handleAppInference():
     data = request.get_json()
     prompt = data["prompt"]
     img_data = run_inference(prompt)
-    return img_data
+    return send_file(img_data, mimetype='image/png')
     
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=3000)
+    app.run(threaded=False, host='0.0.0.0', port=3000)

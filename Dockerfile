@@ -5,7 +5,7 @@ CMD nvidia-smi
 RUN sh -c 'echo "APT { Get { AllowUnauthenticated \"1\"; }; };" > /etc/apt/apt.conf.d/99allow_unauth'
 
 RUN apt -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsecureRepositories=true update
-RUN apt-get install -y curl wget
+RUN apt-get update && apt-get upgrade -y && apt-get install -y curl wget gcc sudo
 
 RUN apt-key del 7fa2af80
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb
@@ -25,11 +25,22 @@ RUN apt-get -y install python3-pip
 # Install Rust to fix Pip install issue
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
 
+# Install NodeJs
+RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+
+RUN sudo apt -y install nodejs
+
 WORKDIR /stable_diffusion_server
 
 COPY . .
 
 RUN pip3 install -r requirements.txt
+
+WORKDIR /stable_diffusion_server/frontend
+
+RUN npm install --force && npm run build
+
+WORKDIR /stable_diffusion_server
 
 RUN python3 -c 'from huggingface_hub import HfFolder; HfFolder.save_token("<TOKEN>")'
 
